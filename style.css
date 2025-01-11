@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.logo{
+    height: 50px;
+}
+
+.logo-container{
+    margin-right: auto;
+    padding-left: 1em;
+}
+
+
+
+.navbar{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-list{
+    display: flex;
+    color: white;
+    text-decoration: none;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-right: 10px; */
+}
+.nav-list li a{
+    padding-right: 1rem;
+    color: white;
+    text-decoration: none;
+    transition: color .5s ease;
+}
+.nav-list li a:hover{
+    color: orange;
+    /* transform: color .9s; */
+}
+
+
+  .hero{
+    background-color: rgb(238, 72, 72);
+    padding: 5rem;
+    /* justify-content: center; */
+  }
+  .container {
+    /* display: flex; */
+    /* justify-content: center; */
+    text-align: center;
+    margin-top: 0.7rem;
+
+    line-height: 40px;
+  }
+
+  .container .cta-button{
+    border: none;
+
+    background-color: grey;
+
+    color: white;
+
+    border-radius: 5px;
+
+    height: 30px;
+  }
+
+
+
+
+  
+  .card-container {
+    display: flex;
+    gap: 40px; /* Space between cards */
+    justify-content: center; /* Center cards horizontally */
+    padding: 20px;
+}
+
+/* Card styling */
+.menu-card {
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 350px; /* Card width */
+    text-align: center;
+}
+
+.shop-category{
+    text-align: center;
+}
+
+.customer{
+    color: white;
+    background-color: rgb(42, 37, 37);
+}
+footer{
+    text-align: center;
+    background-color: black;
+    color: white;
+}
