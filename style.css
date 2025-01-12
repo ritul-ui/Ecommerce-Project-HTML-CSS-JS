@@ -101,3 +101,119 @@ footer{
     background-color: black;
     color: white;
 }
+
+
+/* media queries  */
+
+/* Mobile devices (up to 768px wide) */
+@media (max-width: 768px) {
+
+    /* Navbar adjustments */
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .logo-container {
+        margin: 0;  /* Remove the right margin */
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .nav-list {
+        /* flex-direction: column; */
+        /* align-items: center; */
+        display: flex;
+        flex-wrap:  wrap;
+        justify-self:center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .nav-list li a {
+        padding: 10px 0; /* More padding for each link */
+        font-size: 1.2rem; /* Increase font size for better readability */
+    }
+
+    /* Hero section adjustments */
+    .hero {
+        padding: 2rem; /* Reduced padding for smaller screens */
+    }
+
+    .container {
+        margin-top: 2rem;
+        line-height: 30px; /* Adjust line height for readability */
+    }
+
+    .container .cta-button {
+        padding: 10px 20px; /* Larger button for easier tap */
+        height: auto;
+        font-size: 1rem; /* Adjust font size */
+    }
+
+    /* Card container adjustments */
+    .card-container {
+        flex-direction: column;  /* Stack cards vertically */
+        padding: 10px;
+        gap: 20px;  /* Reduced gap between cards */
+    }
+
+    /* Card adjustments */
+    .menu-card {
+        width: 90%; /* Cards take up more space on smaller screens */
+        margin: 0 auto; /* Center cards */
+    }
+
+    /* Footer adjustments */
+    footer {
+        padding: 1rem;  /* Add padding for footer on mobile */
+    }
+
+    /* Shop Category Section adjustments */
+    .shop-category {
+        margin-top: 2rem;
+    }
+
+    .customer {
+        font-size: 0.9rem;  /* Smaller font size for mobile */
+    }
+}
+
+/* Smaller mobile devices (up to 480px wide) */
+@media (max-width: 480px) {
+
+    /* Navbar adjustments */
+    .nav-list li a {
+        padding: 8px 0; /* Further reduced padding for smaller screens */
+        font-size: 1rem; /* Smaller font size */
+    }
+
+    .hero {
+        padding: 1.5rem; /* Reduced padding for even smaller screens */
+    }
+
+    .container {
+        margin-top: 1.5rem;
+        line-height: 25px; /* Adjust line-height for small screens */
+    }
+
+    .container .cta-button {
+        padding: 8px 16px; /* Adjust button padding */
+    }
+
+    .card-container {
+        gap: 15px; /* Further reduced gap between cards */
+    }
+
+    .menu-card {
+        width: 95%; /* Cards will be even smaller */
+    }
+
+    footer {
+        font-size: 0.9rem; /* Slightly smaller text in footer */
+    }
+
+    .customer {
+        font-size: 0.8rem;  /* Smaller font size */
+    }
+}
