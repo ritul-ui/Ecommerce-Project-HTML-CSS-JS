@@ -20,81 +20,67 @@
         <script>
     console.log("products", products);
 
+            // 3rd method to solve this problem
+            // document.addEventListener('DOMContentLoaded', function () {
+            //    const productlist = document.getElementById("product-list");
+            //     for(const product of products){
+            //     const productCard = document.createElement("div");
+            //     productCard.classList.add("col-lg-3", "col-md-4", "col-sm-6","mb-4");
+
+            //         const productImg = document.createElement("img");
+            //         productImg.src = product.image;
+            //         productImg.alt = product.name;
+            //         productImg.classList.add("card-img-top");
+
+            //         const cardBody = document.createElement("div");
+            //         cardBody.classList.add("card-body-1");
+
+            //         const cardTitle = document.createElement("h5");
+            //         cardTitle.innerText = product.name;
+            //         const cardText = document.createElement("p");
+            //         cardText.classList.add("card-text");
+            //         cardText.innerText = product.description;
+
+            //         const cartButton = document.createElement("a");
+            //         cartButton.href = "#";
+            //         cartButton.classList.add("btn");
+            //         cartButton.classList.add("btn-primary");
+            //         cartButton.innerText = "Add to Cart"
+
+            //     cardBody.append(cardTitle, cardText, cartButton);
+            //     productCard.append(productImg, cardBody);
+            //     productlist.append(productCard);
+
+            //     }
+                
+            // })
 
 
-// const productCard = document.createElement("div");
+    
 
-// productCard.classList.add("card");
 
-	
-
-// 	const productImg = document.createElement("img");
-
-// 	productImg.src = product.image;
-
-// 	productImg.alt = product.name;
-
-// 	productImg.classList.add("card-img-top");
-
-	
-
-// 	const cardBody = document.createElement("div");
-
-// 	cardBody.classList.add("card-body");
-
-	
-
-// 	const cardTitle = document.createElement("h5");
-
-// 	cardTitle.innerText = product.name;
-
-// 	const cardText = document.createElement("p");
-
-// 	cardText.classList.add("card-text");
-
-// 	cardText.innerText = product.description;
-
-// 	const cartButton = document.createElement("a");
-
-// 	cartButton.href = "#";
-
-// 	cartButton.classList.add("btn");
-
-// 	cartButton.classList.add("btn-primary");
-
-// 	cartButton.innerText = "Add to Cart"
-
-	
-
-// 	cardBody.append(cardTitle, cardText, cartButton);
-
-// 	productCard.append(productImg, cardBody);
-
-	
-
-// 	productContainer.append(productCard);
-
-// })
             
           
+            //1st method to solve
 
             // function createProductCard(product){
-            // const productCard = document.createElement("div");
-            // productCard.classList.add('col-4', 'mb-4'); 
+            //     const productCard = document.createElement("div");
+            //     productCard.classList.add('col-4', 'mb-4'); 
 
-            
-            // const cardContent = `
-            //     <div class="card">
-            //         <img src="${product.image}" class="card-img-top" alt="${product.name}">
-            //         <div class="card-body">
-            //             <h5 class="card-title">${product.name}</h5>
-            //             <p class="card-text">${product.description}</p>
-            //             <p class="card-text"><strong>$${product.price}</strong></p>
-            //             <a href="" class="btn btn-primary">Buy Now</a>
-            //         </div>
-            //     </div>
-            // `;
-            // productCard.innerHTML = cardContent;
+                
+            //         const cardContent = `
+            //             <div class="card">
+            //                 <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            //                 <div class="card-body">
+            //                     <h5 class="card-title">${product.name}</h5>
+            //                     <p class="card-text">${product.description}</p>
+            //                     <p class="card-text"><strong>$${product.price}</strong></p>
+            //                     <a href="" class="btn btn-primary">Buy Now</a>
+            //                 </div>
+            //             </div>
+            //         `;
+            //         productCard.innerHTML = cardContent;
+            //         return productCard;
             // }
             
             // const productlist = document.getElementById("product-list");
@@ -105,7 +91,9 @@
             //     productlist.appendChild(productCard1);
             // });
 
-            document.addEventListener('DOMContentLoaded', function () {
+
+            // 2nd method to solve
+             document.addEventListener('DOMContentLoaded', function () {
                 const productList = document.getElementById('product-list');
                 for(const product of products){
                     const card = document.createElement('div');
