@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="product.css">
+    <title>Product Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">E-Commerce Product Page</h1>
+        <div id="product-list" class="row">
+            <!-- Product cards will be dynamically added here -->
+        </div>
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="product.js"></script>
+        
+        <script>
+    console.log("products", products);
+
+
+
+// const productCard = document.createElement("div");
+
+// productCard.classList.add("card");
+
+	
+
+// 	const productImg = document.createElement("img");
+
+// 	productImg.src = product.image;
+
+// 	productImg.alt = product.name;
+
+// 	productImg.classList.add("card-img-top");
+
+	
+
+// 	const cardBody = document.createElement("div");
+
+// 	cardBody.classList.add("card-body");
+
+	
+
+// 	const cardTitle = document.createElement("h5");
+
+// 	cardTitle.innerText = product.name;
+
+// 	const cardText = document.createElement("p");
+
+// 	cardText.classList.add("card-text");
+
+// 	cardText.innerText = product.description;
+
+// 	const cartButton = document.createElement("a");
+
+// 	cartButton.href = "#";
+
+// 	cartButton.classList.add("btn");
+
+// 	cartButton.classList.add("btn-primary");
+
+// 	cartButton.innerText = "Add to Cart"
+
+	
+
+// 	cardBody.append(cardTitle, cardText, cartButton);
+
+// 	productCard.append(productImg, cardBody);
+
+	
+
+// 	productContainer.append(productCard);
+
+// })
+            
+          
+
+            // function createProductCard(product){
+            // const productCard = document.createElement("div");
+            // productCard.classList.add('col-4', 'mb-4'); 
+
+            
+            // const cardContent = `
+            //     <div class="card">
+            //         <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            //         <div class="card-body">
+            //             <h5 class="card-title">${product.name}</h5>
+            //             <p class="card-text">${product.description}</p>
+            //             <p class="card-text"><strong>$${product.price}</strong></p>
+            //             <a href="" class="btn btn-primary">Buy Now</a>
+            //         </div>
+            //     </div>
+            // `;
+            // productCard.innerHTML = cardContent;
+            // }
+            
+            // const productlist = document.getElementById("product-list");
+
+            // products.forEach(product => {
+            //     const productCard1 = createProductCard(product);
+            //     console.log("prodiuct card", productCard1);
+            //     productlist.appendChild(productCard1);
+            // });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const productList = document.getElementById('product-list');
+                for(const product of products){
+                    const card = document.createElement('div');
+                    card.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'col-xs-12', 'mb-4');
+                    card.innerHTML = `
+                    <div class="card h-100">
+                        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text font-weight-bold">$${product.price.toFixed(2)}</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                    `
+                    productList.appendChild(card);
+                }
+                
+            })
+
+
+            
+        </script>
+</body>
+
+</html>
