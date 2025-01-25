@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="cart.css" />
+  </head>
+  <body>
+    <div class="cart-container">
+      <h1 class="cart-title">E-Commerce Cart Page</h1>
+      <div id="cart-items" class="cart-items-container">
+        <!-- Cart cards will be dynamically added here -->
+      </div>
+      <div class="cart-summary">
+        <p id="cart-total">Total : $0.00</p>
+        <button class="cart-checkout-button" id="checkout-button">
+          Checkout
+        </button>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="cart.js"></script>
+    <script>
+      const cartTotalElement = document.getElementById("cart-total");
+      const checkoutButton = document.getElementById("checkout-button");
+
+      console.log("cart products", cartProducts);
+      // let initialCart = cartProducts;
+      //   1) initializeCart() - save the acrt items in local Storage
+      //   2) event listeneer - loadCartItems() - js code for cart items
+      //     update the quantity and remove
+      //    3)  update totalamount function
+      //    4) checkout button event listeneer to alert message
+
+      // Initialize the cart if it doesn't exist in localStorage
+      function initializeCart() {
+        const initialCart = [
+          {
+            id: 1,
+            name: "Laptop",
+            price: 1200.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 2,
+            name: "Headphones",
+            price: 150.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 3,
+            name: "Mouse",
+            price: 25.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 4,
+            name: "Airpods",
+            price: 120.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+          {
+            id: 5,
+            name: "Cable",
+            price: 10.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 6,
+            name: "Keyboard",
+            price: 50.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 7,
+            name: "Cable",
+            price: 10.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+
+          {
+            id: 8,
+            name: "Keyboard",
+            price: 50.0,
+            quantity: 1,
+            image:
+              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
+          },
+        ];
+
+        if (!localStorage.getItem("cart")) {
+          localStorage.setItem("cart", JSON.stringify(initialCart));
+        }
+      }
+
+      // Load Cart Items from localStorage and display them
+      function loadCartItems() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        console.log("cart get", cart);
+        const cartItemsContainer = document.getElementById("cart-items");
+        if (cart.length > 0) {
+          cartItemsContainer.innerHTML = ""; // Clear the cart container before adding items
+
+          cart.forEach((item, index) => {
+            const itemDiv = document.createElement("div");
+            itemDiv.classList.add("cart-item");
+            itemDiv.innerHTML = `
+                <div class="cart-item-details">
+                    <img src="${item.image}" alt="${item.name}" />
+                    <p class="cart-item-title">${item.name}</p>
+                    <p class="cart-item-price">Price: $${item.price.toFixed(2)}</p>
+                    <div class="cart-item-actions">
+                        <input type="number" value="${item.quantity}" min=1 class="quantity-input" />
+                        <button class="remove-button">Remove</button>
+                    </div>
+                </div>
+            `;
+            console.log("itemdiv", itemDiv);
+            cartItemsContainer.appendChild(itemDiv);
+
+            //add event listner
+            const removeButton = itemDiv.querySelector(".remove-button");
+            const quantityInput = itemDiv.querySelector(".quantity-input");
+            console.log("quantity div", quantityInput);
+
+            removeButton.addEventListener("click", () => {
+              console.log("index", index);
+              cart.splice(index, 1);
+              localStorage.setItem("cart", JSON.stringify(cart));
+              loadCartItems();
+            });
+
+            quantityInput.addEventListener("change", (event) => {
+              item.quantity = parseInt(event.target.value);
+              localStorage.setItem("cart", JSON.stringify(cart));
+              updateCartTotal();
+            });
+          });
+          updateCartTotal();
+        } else {
+          updateCartTotal();
+          cartItemsContainer.innerHTML = "<p> Your cart is empty </p>";
+        }
+      }
+
+      // Update the total amount of the cart
+      function updateCartTotal() {
+        let total = 0;
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.forEach((item) => {
+          // console.log("item inner");
+          total = total + item.price * item.quantity;
+        });
+        cartTotalElement.textContent = `Total : $${total.toFixed(2)}`;
+      }
+
+      checkoutButton.addEventListener("click", () => {
+        alert("procedding to checkout");
+      });
+
+      // Initialize Cart on page load
+      initializeCart();
+
+      // Load cart items when page loads
+      loadCartItems();
+    </script>
+  </body>
+</html>
