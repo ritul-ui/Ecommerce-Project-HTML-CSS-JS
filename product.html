@@ -18,7 +18,7 @@
         <script src="product.js"></script>
         
         <script>
-    console.log("products", products);
+    // console.log("products", products);
 
             // 3rd method to solve this problem
             // document.addEventListener('DOMContentLoaded', function () {
@@ -95,24 +95,66 @@
             // 2nd method to solve
              document.addEventListener('DOMContentLoaded', function () {
                 const productList = document.getElementById('product-list');
-                for(const product of products){
-                    const card = document.createElement('div');
+                fetch("products.json").then(response => 
+                     response.json()
+                    
+                ).then (data => {
+                   
+                        data.forEach(product => {
+                            console.log("prod??", product);
+                            const card = document.createElement('div');
                     card.classList.add('col-lg-3', 'col-md-4', 'col-sm-6', 'col-xs-12', 'mb-4');
                     card.innerHTML = `
-                    <div class="card h-100">
+                    <div class="card h-100"> <!-- Ensure cards are of equal height -->
                         <img src="${product.image}" class="card-img-top" alt="${product.name}">
                         <div class="card-body">
                             <h5 class="card-title">${product.name}</h5>
                             <p class="card-text">${product.description}</p>
                             <p class="card-text font-weight-bold">$${product.price.toFixed(2)}</p>
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                            <div class="inputBtn">
+                                <input type="number" class="quantity-input" value="1" min="1" />
+                            
+                            <a href="#" class="btn btn-primary add-to-cart" data-product='${JSON.stringify(product)}'>Add to Cart</a>
+                            </div>
                         </div>
                     </div>
                     `
                     productList.appendChild(card);
-                }
+                        });
+
+                        document.querySelectorAll(".add-to-cart").forEach(button => {
+                            button.addEventListener("click", (event) => {
+                                event.preventDefault();
+                                console.log("hi");
+                                const product = JSON.parse(event.target.getAttribute("data-product"));
+                                console.log("prod>>", product);
+                                const quantityInput = event.target.previousElementSibling;
+                                const quantity = parseInt(quantityInput.value);
+                                addToCart(product, quantity);
+                            })
+                        })
+                   
+            
+                }).catch(err => {
+                    console.log(error);
+                })
                 
-            })
+                
+            });
+
+            function addToCart(product, quantity){
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const existingProduct = cart.find((item) => item.name === product.name);
+                console.log("exist", existingProduct);
+                if(existingProduct){
+                    existingProduct.quantity += quantity;
+                }else{
+                    product.quantity  = quantity;
+                    cart.push(product);
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+                alert('Product added to cart');
+            }
 
 
             

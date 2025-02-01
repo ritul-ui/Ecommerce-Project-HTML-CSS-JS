@@ -28,8 +28,9 @@
     <script>
       const cartTotalElement = document.getElementById("cart-total");
       const checkoutButton = document.getElementById("checkout-button");
+      const cartItemsContainer = document.getElementById("cart-items");
 
-      console.log("cart products", cartProducts);
+      // console.log("cart products", cartProducts);
       // let initialCart = cartProducts;
       //   1) initializeCart() - save the acrt items in local Storage
       //   2) event listeneer - loadCartItems() - js code for cart items
@@ -37,91 +38,14 @@
       //    3)  update totalamount function
       //    4) checkout button event listeneer to alert message
 
-      // Initialize the cart if it doesn't exist in localStorage
-      function initializeCart() {
-        const initialCart = [
-          {
-            id: 1,
-            name: "Laptop",
-            price: 1200.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 2,
-            name: "Headphones",
-            price: 150.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 3,
-            name: "Mouse",
-            price: 25.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 4,
-            name: "Airpods",
-            price: 120.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-          {
-            id: 5,
-            name: "Cable",
-            price: 10.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 6,
-            name: "Keyboard",
-            price: 50.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 7,
-            name: "Cable",
-            price: 10.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-
-          {
-            id: 8,
-            name: "Keyboard",
-            price: 50.0,
-            quantity: 1,
-            image:
-              "https://placehold.co/400x300/f1c1b9/white?text=Premium+Leather+Bag",
-          },
-        ];
-
-        if (!localStorage.getItem("cart")) {
-          localStorage.setItem("cart", JSON.stringify(initialCart));
-        }
-      }
+      
+      
 
       // Load Cart Items from localStorage and display them
       function loadCartItems() {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
         console.log("cart get", cart);
-        const cartItemsContainer = document.getElementById("cart-items");
+        
         if (cart.length > 0) {
           cartItemsContainer.innerHTML = ""; // Clear the cart container before adding items
 
@@ -183,7 +107,7 @@
       });
 
       // Initialize Cart on page load
-      initializeCart();
+      // initializeCart();
 
       // Load cart items when page loads
       loadCartItems();

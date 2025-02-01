@@ -8,7 +8,7 @@
     <script>
       // Function for client-side validation
       function validateForm(event) {
-        // event.preventDefault();
+        event.preventDefault();
         const form = event.target;
         console.log("form", form);
         const email = form.querySelector('input[name="email"]')?.value;
@@ -46,6 +46,7 @@
         }
 
         return true;
+        
       }
     </script>
   </head>
