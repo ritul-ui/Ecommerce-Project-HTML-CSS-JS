@@ -38,6 +38,12 @@
       //    3)  update totalamount function
       //    4) checkout button event listeneer to alert message
 
+      //html loaded then domcontenloaded will run without waiting for css
+      // window.onload everything load
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("load");
+        loadCartItems();
+      })
       
       
 
@@ -110,7 +116,7 @@
       // initializeCart();
 
       // Load cart items when page loads
-      loadCartItems();
+      
     </script>
   </body>
 </html>
