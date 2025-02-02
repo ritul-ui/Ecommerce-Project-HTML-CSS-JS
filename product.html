@@ -39,6 +39,11 @@
         <script src="product.js"></script>
         
         <script>
+
+
+
+
+
     // console.log("products", products);
 
             // 3rd method to solve this problem
@@ -111,7 +116,9 @@
 
             // 2nd method to solve
 
-
+                 // Initialize global variable for all products
+                let products = []; // Initialize the products array (to be filled when data is fetched)
+                let filteredProducts = [];  // Initialize the filtered products array
 
              document.addEventListener('DOMContentLoaded', function () {
                 
@@ -119,8 +126,10 @@
                      response.json()
                     
                 ).then (data => {
+                    console.log("data>", data);
                    window.products = data;
-                   
+                   products = data; // Store all products in the global variable
+                   filteredProducts = data; // Initialize filtered products with all products initially
                      displayProducts(data);
                    
             
@@ -192,21 +201,31 @@
             }
 
             function handleSearch(){
-                try{
+                    console.log("filtered product", filteredProducts);
                     console.log("hi");
-                    const query = document.getElementById('search').value.toLowerCase();
-                    const filteredProducts = window.products.filter(product =>  product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query));
-                    console.log("filter search", filteredProducts);
-                    displayProducts(filteredProducts);
-                }catch(error){
-                    console.log('error handling search', error);
-                    document.getElementById('error-message').textContent = 'Error processing search. Please try again.';
-                }
+                    const query = document.getElementById('search').value.toLowerCase().trim();
+                    console.log("query", query);
+                    // If filteredProducts is empty, use the entire products array for search
+                    if (filteredProducts.length === 0) {
+                        console.log("0 prod");
+                        filteredProducts = products; // Reset to all products if no filter
+                    }
+                    const searchResults = filteredProducts.filter(product => {
+                        console.log("name", product.name);
+                        console.log("inc", product.name.toLowerCase().includes(query) );
+                        console.log("desc", product.description.toLowerCase().includes(query));
+                    return  product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query)
+            })
+                    
+                    console.log("filter search", searchResults);
+                    displayProducts(searchResults);
+                
             }
 
 
             function applyFilters() {
-                const query = document.getElementById('search').value.toLowerCase();
+                const query = document.getElementById('search').value.toLowerCase().trim(); // Get the search query
+                console.log("query filter text", query);
                 const priceRange = document.getElementById('price-range').value;
                 console.log("pricerange", priceRange);
 
@@ -217,9 +236,10 @@
                         [minPrice, maxPrice] = priceRange.split('-').map(Number);
                         console.log("minprice maxperice", minPrice, maxPrice, priceRange);
                 }
+                console.log("price 0");
 
                 // Filter products based on query and price range
-                const filteredProducts = window.products.filter(product => {
+                 filteredProducts = products.filter(product => {
                     console.log("prio", product);
                     const isNameMatch = product.name.toLowerCase().includes(query);
                     const isDescriptionMatch = product.description.toLowerCase().includes(query);
