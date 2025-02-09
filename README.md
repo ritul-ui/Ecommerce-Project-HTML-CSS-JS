@@ -1,2 +1,3 @@
-# Ecommerce-Project-HTML-CSS-JS
- 
+The goal of this project is to develop a website using vanilla JavaScript, HTML, CSS. The application will display the products from API call in landing page and when user clicks on shop link in navbar it navigates to product page where user can add products to cart and see the products in cart page while navigating to cart nav-link in landing page.
+
+In this project, I have practised about DOM manipulation, animations in css, async await, promises, callbacks, call, apply, bind, oops concept in js, form validation, debounce, throttle in js. I have implemented search and filter functionality in product page.
