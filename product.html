@@ -42,8 +42,6 @@
 
 
 
-
-
     // console.log("products", products);
 
             // 3rd method to solve this problem
@@ -121,6 +119,86 @@
                 let filteredProducts = [];  // Initialize the filtered products array
 
              document.addEventListener('DOMContentLoaded', function () {
+
+                // Define the base class for a product
+            class Product {
+                constructor(name, price, description, image) {
+                    this.name = name;
+                    this.price = price;
+                    this.description = description;
+                    this.image = image;
+                }
+
+                display() {
+                    return `
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <img src="${this.image}" class="card-img-top" alt="${this.name}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${this.name}</h5>
+                                    <p class="card-text">${this.description}</p>
+                                    <p class="card-text font-weight-bold">$${this.price.toFixed(2)}</p>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" class="quantity-input" value="1" min="1">
+                                        <a href="#" class="btn btn-primary add-to-cart" data-product='${JSON.stringify(this)}'>Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Define the derived class for a discounted product
+            class DiscountedProduct extends Product {
+                constructor(name, price, description, image, discount) {
+                    super(name, price, description, image);
+                    this.discount = discount;
+                }
+
+                display() {
+                    const discountedPrice = this.price - (this.price * (this.discount / 100));
+                    return `
+                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                            <div class="card h-100">
+                                <img src="${this.image}" class="card-img-top" alt="${this.name}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${this.name}</h5>
+                                    <p class="card-text">${this.description}</p>
+                                    <p class="card-text font-weight-bold">$${discountedPrice.toFixed(2)}
+                                    <span class="discount">${this.discount}% OFF</span></p>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" class="quantity-input" value="1" min="1">
+                                        <a href="#" class="btn btn-primary add-to-cart" data-product='${JSON.stringify(this)}'>Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Example dummy discounted product with a similar image
+            const discountedProduct = [new DiscountedProduct(
+                
+                
+                "Dummy Discounted Product",
+                40.00,
+                "This is a dummy discounted product.",
+                "https://placehold.co/400x300/110e0e75/black?text=Discounted+Product",
+                30 // 30% discount
+            ), new DiscountedProduct(
+                
+
+                "Dummddfewfwey Discounted Product",
+                90.00,
+                "This is a dfd discounted product.",
+                "https://placehold.co/400x300/110e0e75/black?text=Discounted+Product",
+                90 // 30% discount
+            )];
+
+
+            // Fetch products from products.json and display them
                 
                 fetch("products.json").then(response => 
                      response.json()
@@ -131,7 +209,16 @@
                    products = data; // Store all products in the global variable
                    filteredProducts = data; // Initialize filtered products with all products initially
                      displayProducts(data);
-                   
+
+
+                      // Also display the dummy discounted product for inheritance demonstration
+                    const productList = document.getElementById('product-list');
+                    console.log("prod", discountedProduct);
+                    discountedProduct.forEach((dp) => {
+                        productList.innerHTML += dp.display();
+                    })
+
+                    attachEventListener();
             
                 }).catch(err => {
                     console.log(err);
@@ -171,7 +258,11 @@
                     productList.innerHTML = "<p> No product Found </p>";
                 }
 
-                        document.querySelectorAll(".add-to-cart").forEach(button => {
+                attachEventListener();
+            }
+
+            function attachEventListener(){
+                document.querySelectorAll(".add-to-cart").forEach(button => {
                             button.addEventListener("click", (event) => {
                                 event.preventDefault();
                                 console.log("hi");
@@ -183,6 +274,7 @@
                             })
                         })
             }
+            
 
 
 
@@ -259,6 +351,7 @@
         function debounce(func, delay) {
             let timerId;
             return function (...args) {
+                console.log("args", ...args, this.value);
                 clearTimeout(timerId);
                 timerId = setTimeout(() => func.apply(this, args), delay);
             };
@@ -284,15 +377,15 @@
         }
 
         const searchInput = document.getElementById('search');
-        searchInput.addEventListener('input', function() {
-            // const query = searchInput.value; // Get the current input value
-            // handleSearch(query); // Call the search handler with the query
-            handleSearch();
-        });
+        // searchInput.addEventListener('input', function() {
+        //     // const query = searchInput.value; // Get the current input value
+        //     // handleSearch(query); // Call the search handler with the query
+        //     handleSearch();
+        // });
         
-        // searchInput.addEventListener('input', debounce(function () {
-        //     handleSearch(this.value);
-        // }, 300)); // Debounce delay of 300ms
+        searchInput.addEventListener('input', debounce(function () {
+            handleSearch(this.value);
+        }, 300)); // Debounce delay of 300ms
 
 
         // Uncomment to use throttling instead of debouncing
